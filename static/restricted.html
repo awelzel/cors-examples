@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <script src="lib.js"></script>
+  </head>
+  <body>
+    <h4>GET to http://localhost:9000/resource/foo.example.com (simple)</h4>
+    <p>Result:</p>
+    <p id="simple_status"></p>
+    <h4>PUT to http://localhost:9000/resource/foo.example.com (preflight)</h4>
+    <p>Result:</p>
+    <p id="preflight_status"></p>
+  </body>
+  <script>
+
+    var r = new XMLHttpRequest();
+    r.open("GET", "http://localhost:9000/resource/foo.example.com", true);
+    r.onreadystatechange = function () {
+      if (r.readyState != 4) {
+        return;
+      }
+      updateStatus("simple_status", r);
+    };
+    r.send();
+
+    var rPut = new XMLHttpRequest();
+    rPut.open("PUT", "http://localhost:9000/resource/foo.example.com", true);
+    rPut.onreadystatechange = function () {
+      if (rPut.readyState != 4) {
+        return;
+      }
+      updateStatus("preflight_status", r);
+    };
+    rPut.send();
+</script>
+</html>
